@@ -10,61 +10,68 @@
     <!-- Link CSS Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- Link Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <!-- Link CSS Internal -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid pt-3 pb-5">
         <div class="row">
             <div class="d-inline-flex align-items-center">
                 <div>
-                    <a href="#" class="h1 p-2"><img src="assets/img/back-button.svg" alt="back button"></a>
+                    <a href="#" class="h1 p-4"><img src="assets/img/back-button.svg" class="img-fluid"
+                            alt="back button"></a>
                 </div>
                 <div>
-                    <img src="assets/img/logo 1.png" class="img-fluid" alt="logo batu gunting kertas">
+                    <img src="assets/img/logo 1.png" class="img-fluid logo" alt="logo batu gunting kertas">
                 </div>
                 <div>
-                    <h1 class="h1 text-uppercase m-1 p-3">rock paper scissors</h1>
+                    <h1 class="h1 text-uppercase m-1 p-3 game-title">rock paper scissors</h1>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container pt-3">
         <div class="row">
             <div class="col d-flex align-items-center flex-column">
-                <h3 class="text-uppercase">player 1</h3>
+                <h3 class="text-uppercase pb-3 identity">player 1</h3>
                 <div class="d-flex flex-column" id="userChoice">
-                    <div class="d-flex align-items-center justify-content-center" id="userRock">
-                        <img src="assets/img/batu.png" class="img-fluid w-25" alt="rock">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3 selections" id="userRock">
+                        <img src="assets/img/batu.png" class="rock-selected" alt="rock">
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" id="userPaper">
-                        <img src="assets/img/kertas.png" class="img-fluid w-25" alt="paper">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3 selections" id="userPaper">
+                        <img src="assets/img/kertas.png" class="paper-selected" alt="paper">
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" id="userScissors">
-                        <img src="assets/img/gunting.png" class="img-fluid w-25" alt="scissors">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3 selections" id="userScissors">
+                        <img src="assets/img/gunting.png" class="scissors-selected" alt="scissors">
                     </div>
                 </div>
             </div>
-            <div class="col d-flex align-items-center justify-content-center" id="gameResult">
-                VS
+            <div class="col align-items-center justify-content-center position-relative">
+                <div class="align-self-center position-absolute top-50 start-50 translate-middle">
+                    <p class="game-result" id="gameResult">vs</p>
+                </div>
             </div>
             <div class="col d-flex align-items-center flex-column">
-                <h3 class="text-uppercase">com</h3>
+                <h3 class="text-uppercase pb-3 identity">com</h3>
                 <div class="d-flex flex-column" id="comChoice">
-                    <div class="d-flex align-items-center justify-content-center" id="comRock">
-                        <img src="assets/img/batu.png" class="img-fluid w-25" alt="rock">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3" id="comRock">
+                        <img src="assets/img/batu.png" class="rock-selected" alt="rock">
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" id="comPaper">
-                        <img src="assets/img/kertas.png" class="img-fluid w-25" alt="paper">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3" id="comPaper">
+                        <img src="assets/img/kertas.png" class="paper-selected" alt="paper">
                     </div>
-                    <div class="d-flex align-items-center justify-content-center" id="comScissors">
-                        <img src="assets/img/gunting.png" class="img-fluid w-25" alt="scissors">
+                    <div class="d-flex align-items-center justify-content-center p-3 m-3" id="comScissors">
+                        <img src="assets/img/gunting.png" class="scissors-selected" alt="scissors">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="d-flex align-items-center justify-content-center">
-                <img src="assets/img/refresh.png" class="img-fluid w-25" alt="refresh" id="refreshButton">
+            <div class="d-flex align-items-center justify-content-center selections">
+                <img src="assets/img/refresh.png" class="img-fluid refresh-button" alt="refresh" id="refreshButton">
             </div>
         </div>
     </div>

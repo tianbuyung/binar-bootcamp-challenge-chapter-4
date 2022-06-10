@@ -1,53 +1,89 @@
 // 0 = rock, 1 = paper, 2 = scissors
-
-const comChoiceValue = comChoice();
 let userChoiceValue = userChoice();
+let comChoiceValue = comChoice();
 let gameIsStarted = false;
-// console.log(gameIsStarted);
 
 function userChoice() {
-	let userClick = document.querySelectorAll('#userChoice div');
+	const userClick = document.querySelectorAll('#userChoice div');
 	for (let index = 0; index < userClick.length; index++) {
 		userClick[index].addEventListener('click', () => {
-			if (userChoiceValue == null) {
-				userChoiceValue = index;
+			if (gameIsStarted === false) {
+				if (userChoiceValue == null) {
+					userChoiceValue = index;
+				}
+				styling(userClick[index]);
+				stylingCom(comChoiceValue);
+				whoIsWin(userChoiceValue, comChoiceValue);
+				gameIsStarted = true;
 			}
-			// console.log('ini pilihan user', userChoiceValue);
-			// console.log('ini pilihan komputer', comChoiceValue);
-			const areYouWin = whoIsWin(userChoiceValue, comChoiceValue);
-			// console.log(areYouWin);
-			gameIsStarted = true;
-			// console.log(gameIsStarted);
 		});
 	}
 }
 
 function comChoice() {
-	let randomChoice = Math.floor(Math.random() * 3);
+	let randomChoice = Math.floor(Math.random() * 2.9);
 	return randomChoice;
 }
 
 function whoIsWin(userChoiceValue, comChoiceValue) {
-	let gameResult = document.getElementById('gameResult');
+	let theWinner;
+	const gameResult = document.getElementById('gameResult');
 	if (userChoiceValue === comChoiceValue) {
-		return (gameResult.innerHTML = 'draw');
+		return (
+			(theWinner = 'draw'),
+			(gameResult.innerHTML = 'draw'),
+			gameResult.classList.remove('game-result', 'result-win'),
+			gameResult.classList.add('result-draw')
+		);
 	} else if (
 		(userChoiceValue === 0 && comChoiceValue === 2) ||
 		(userChoiceValue === 1 && comChoiceValue === 0) ||
 		(userChoiceValue === 2 && comChoiceValue === 1)
 	) {
-		return (gameResult.innerHTML = 'user win');
+		return (
+			(theWinner = 'player 1 win'),
+			(gameResult.innerHTML = 'player 1 win'),
+			gameResult.classList.remove('game-result', 'result-draw'),
+			gameResult.classList.add('result-win')
+		);
 	} else {
-		return (gameResult.innerHTML = 'com win');
+		return (
+			(theWinner = 'com win'),
+			(gameResult.innerHTML = 'com win'),
+			gameResult.classList.remove('game-result', 'result-draw'),
+			gameResult.classList.add('result-win')
+		);
 	}
 }
 
-const refreshButton = document.getElementById('refreshButton');
+function styling(element) {
+	element.classList.add('selected');
+}
 
-refreshButton.onclick = function refresh() {
-	gameIsStarted = false;
+function stylingCom(index) {
+	const elementComp = document.querySelectorAll('#comChoice div');
+	elementComp[index].classList.add('selected');
+}
+
+function refresh() {
+	const userClick = document.getElementsByClassName('selected');
+	if (userClick.length > 0) {
+		userClick[0].classList.remove('selected');
+	}
+	const elementComp = document.getElementsByClassName('selected');
+	if (elementComp.length > 0) {
+		elementComp[0].classList.remove('selected');
+	}
+	gameResult.innerHTML = 'VS';
+	gameResult.classList.remove('result-win', 'result-draw');
+	gameResult.classList.add('game-result');
 	userChoiceValue = null;
-	gameResult.innerHTML = 'vs';
-	// console.log(refreshButton);
-	// console.log(gameIsStarted, userChoiceValue);
+	comChoiceValue = comChoice();
+	gameIsStarted = false;
+}
+
+let refreshButton = document.getElementById('refreshButton');
+
+refreshButton.onclick = () => {
+	refresh();
 };
