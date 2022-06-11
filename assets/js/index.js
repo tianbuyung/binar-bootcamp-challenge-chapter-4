@@ -1,6 +1,11 @@
 // 0 = rock, 1 = paper, 2 = scissors
 class Game {
-  constructor(userChoiceValue, gameIsStarted) {
+  constructor(props) {
+    // OOP Abstraction
+    if (this.constructor === Game) {
+      throw new Error("Cannot instantiate from Abstract Class");
+    }
+    let { userChoiceValue, gameIsStarted } = props;
     this.userChoiceValue = userChoiceValue;
     this.gameIsStarted = gameIsStarted;
   }
@@ -62,9 +67,9 @@ class Game {
 
 // OOP Inheritance
 class Computer extends Game {
-  constructor(userChoiceValue, gameIsStarted, comChoiceValue) {
-    super(userChoiceValue, gameIsStarted);
-    this.comChoiceValue = comChoiceValue;
+  constructor(props) {
+    super(props);
+    this.comChoiceValue = props.comChoiceValue;
   }
   // Inheritance with Overriding method
   userChoice() {
@@ -112,7 +117,11 @@ class Computer extends Game {
   }
 }
 
-const newGame = new Computer(null, false, null);
+const newGame = new Computer({
+  userChoiceValue: null,
+  gameIsStarted: false,
+  comChoiceValue: null,
+});
 newGame.userChoice();
 
 const refreshButton = document.getElementById("refreshButton");
