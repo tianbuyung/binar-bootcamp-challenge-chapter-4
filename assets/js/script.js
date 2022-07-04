@@ -1,35 +1,14 @@
 // 0 = rock, 1 = paper, 2 = scissors
-class User {
+class Game {
   constructor(props) {
     // OOP Abstraction
-    if (this.constructor === User) {
+    if (this.constructor === Game) {
       throw new Error("Cannot instantiate from Abstract Class");
     }
     let { userChoiceValue, gameIsStarted, comChoiceValue } = props;
     this.userChoiceValue = userChoiceValue;
     this.gameIsStarted = gameIsStarted;
     this.comChoiceValue = comChoiceValue;
-  }
-
-  userChoice() {
-    const userClick = document.querySelectorAll("#userChoice div");
-    for (let index = 0; index < userClick.length; index++) {
-      userClick[index].addEventListener("click", () => {
-        if (this.gameIsStarted === false) {
-          if (this.userChoiceValue == null) {
-            this.userChoiceValue = index;
-          }
-          this.styling(userClick[index]);
-          this.comChoiceValue = this.generateComputerChoice();
-          this.whoIsWin(this.userChoiceValue, this.comChoiceValue);
-          this.gameIsStarted = true;
-        }
-      });
-    }
-  }
-
-  styling(element) {
-    element.classList.add("selected");
   }
 
   refresh() {
@@ -49,6 +28,31 @@ class User {
     this.gameIsStarted = false;
   }
 }
+
+// User Module/Helper
+const User = (Base) =>
+  class extends Base {
+    userChoice() {
+      const userClick = document.querySelectorAll("#userChoice div");
+      for (let index = 0; index < userClick.length; index++) {
+        userClick[index].addEventListener("click", () => {
+          if (this.gameIsStarted === false) {
+            if (this.userChoiceValue == null) {
+              this.userChoiceValue = index;
+            }
+            this.styling(userClick[index]);
+            this.comChoiceValue = this.generateComputerChoice();
+            this.whoIsWin(this.userChoiceValue, this.comChoiceValue);
+            this.gameIsStarted = true;
+          }
+        });
+      }
+    }
+
+    styling(element) {
+      element.classList.add("selected");
+    }
+  };
 
 // Computer Module/Helper
 const Computer = (Base) =>
@@ -81,7 +85,7 @@ const Computer = (Base) =>
   };
 
 // OOP Inheritance & Polymorphism
-class Game extends Computer(User) {
+class WhoIsWin extends Computer(User(Game)) {
   constructor(props) {
     super(props);
   }
@@ -117,7 +121,7 @@ class Game extends Computer(User) {
   }
 }
 
-const newGame = new Game({
+const newGame = new WhoIsWin({
   userChoiceValue: null,
   gameIsStarted: false,
   comChoiceValue: null,
